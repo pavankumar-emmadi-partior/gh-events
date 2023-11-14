@@ -1,0 +1,35 @@
+name: Terraform-Validate-Plan-Apply
+
+on:
+  workflow_call:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: 'read'
+  id-token: 'write'
+
+jobs:
+  terraform:
+    name: 'Terraform Action'
+    runs-on: ubuntu-latest
+
+    permissions:
+      pull-requests: 'write'
+      contents: read
+      id-token: write
+
+    steps:
+      - name: 'Trigger Terraform Validate and Action Build'
+        run: |-
+          ls -ltr && pwd
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: |
+          echo "$GITHUB_CONTEXT"
+
