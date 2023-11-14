@@ -47,7 +47,8 @@ jobs:
           echo "GITHUB_EVENT_NAME: $GITHUB_EVENT_NAME"
           echo "GITHUB_EVENT_PATH: $GITHUB_EVENT_PATH"
           echo "GITHUB_WORKSPACE: $GITHUB_WORKSPACE"
-          if [ ${{ github.event_name == 'pull_request' }} ]; then
+          echo "[INFO]: Validating GITHUB_EVENT_NAME"
+          if ${{ github.event_name == 'pull_request' }}; then
             echo "GITHUB_EVENT_NAME: ${{ github.event_name }}"
             echo "GITHUB PULL REQUEST: ${{ github.event.pull_request.number }}"
             echo "_GIT_HEAD_BRANCH: ${{ github.event.pull_request.head.ref }}"
