@@ -47,9 +47,15 @@ jobs:
           echo "GITHUB_EVENT_NAME: $GITHUB_EVENT_NAME"
           echo "GITHUB_EVENT_PATH: $GITHUB_EVENT_PATH"
           echo "GITHUB_WORKSPACE: $GITHUB_WORKSPACE"
-          echo "GITHUB PULL REQUEST: ${{ github.event.pull_request.number }}"
-          echo "_GIT_HEAD_BRANCH: ${{ github.event.pull_request.head.ref }}"
-          echo "_GIT_BASE_BRANCH: ${{ github.event.pull_request.base.ref }}"
+          if [ ${{ github.event_name == 'pull_request' }} ]; then
+            echo "GITHUB_EVENT_NAME: ${{ github.event_name }}"
+            echo "GITHUB PULL REQUEST: ${{ github.event.pull_request.number }}"
+            echo "_GIT_HEAD_BRANCH: ${{ github.event.pull_request.head.ref }}"
+            echo "_GIT_BASE_BRANCH: ${{ github.event.pull_request.base.ref }}"
+          else
+            echo "GITHUB_EVENT_NAME: ${{ github.event_name }}"
+            echo "GITHUB BRANCH: ${{ github.ref }}"
+          fi
 
       - name: Dump GitHub context
         env:
