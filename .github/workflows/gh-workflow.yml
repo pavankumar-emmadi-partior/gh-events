@@ -55,7 +55,7 @@ jobs:
             echo "_GIT_BASE_BRANCH: ${{ github.event.pull_request.base.ref }}"
           else
             echo "GITHUB_EVENT_NAME: ${{ github.event_name }}"
-            echo "GITHUB BRANCH: ${{ github.ref }}"
+            echo "GITHUB BRANCH: ${{ github.ref_name }}"
           fi
 
       - name: Dump GitHub context
